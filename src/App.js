@@ -7,15 +7,14 @@ import date_utils from './components/Date';
 import Countdown from 'react-countdown';
 
 function getPrayerData() {
-  let todayTimetable = timetable;
-  const currentTime = moment(moment().format("YYYY-MM-DD hh:mm"))
-
+  const todayTimetable = timetable;
+  const currentTime = moment(moment().format("YYYY-MM-DD hh:mm"));
 
   for (const property in todayTimetable) {
     if (property.endsWith("_jammah")) {
       const jammahTime = moment(todayTimetable[property], 'hh:mm');
       if (currentTime.isBefore(jammahTime)) {
-        console.log(jammahTime)
+        console.log(jammahTime);
       }
     }
   }
