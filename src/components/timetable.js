@@ -8,7 +8,7 @@ const timetable = {
     "maghrib_begins": "5:59",
     "maghrib_jammah": "6:03",
     "isha_begins": "7:00",
-    "isha_jammah": "12:00"
+    "isha_jammah": "7:30"
 }
 
 export default timetable;
