@@ -14,7 +14,9 @@ function getPrayerData() {
     if (property.endsWith("_jammah")) {
       const jammahTime = moment(todayTimetable[property], 'hh:mm');
       if (currentTime.isBefore(jammahTime)) {
-        console.log(jammahTime);
+        console.log("*** UPCOMING PRAYER ***")
+        console.log("Prayer: " + property)
+        console.log("Time: " + todayTimetable[property])
       }
     }
   }
@@ -31,7 +33,7 @@ function App() {
       <div>
         <PrayerTable />
         <Countdown
-          date={moment().add(10, 'second')}
+          date={moment().add(1, 'minute')}
           intervalDelay={0}
           precision={3}
           daysInHours={true}
