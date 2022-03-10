@@ -10,5 +10,4 @@ const timetable = {
     "isha_begins": "7:00",
     "isha_jammah": "7:30"
 }
-
 export default timetable;
