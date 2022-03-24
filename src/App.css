@@ -25,6 +25,11 @@ table td {
   padding-bottom: 5px;
 }
 
+tr:nth-of-type(3) td
+{
+  background-color: grey;
+}
+
 .App {
   text-align: center;
 }

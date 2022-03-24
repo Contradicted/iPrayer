@@ -1,5 +1,5 @@
 import moment from "moment";
 
-const date_utils = moment().format('dddd MMM Do, YYYY');
+export const getCurrentDate = moment().format('dddd MMM Do, YYYY');
 
-export default date_utils;
+export const getCurrentDayPlusDays = (days) => moment().add(days, 'days').format("MM/DD/YYYY");
