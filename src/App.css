@@ -11,6 +11,15 @@ h1 {
   font-size: 2.5rem;
 }
 
+h2:nth-child(1) {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+h3 {
+  margin: 0;
+}
 
 table {
   margin: 0 auto;
@@ -25,10 +34,29 @@ table td {
   padding-bottom: 5px;
 }
 
-tr:nth-of-type(3) td
+/* tr:nth-of-type(3) td
 {
   background-color: grey;
+} */
+
+
+.coming-soon {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
 }
+
+.countdown {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.hour,
+.minute,
+.second {
+  font-size: 3rem;
+} 
 
 .App {
   text-align: center;

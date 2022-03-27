@@ -4,7 +4,38 @@ import PrayerTable from './components/prayerTable';
 import timetable from './components/timetable';
 import moment from 'moment';
 import { getCurrentDate, getCurrentDayPlusDays } from './components/Date';
-import Countdown from 'react-countdown';
+import Countdown, { zeroPad } from 'react-countdown';
+
+const renderer = ({ hours, minutes, seconds, completed }) => {
+  if (completed) {
+    return <span>The call to prayer has started</span>
+  } else {
+    return (
+      <div>
+        <PrayerTable />
+        <div className='coming-soon'>
+          <div>
+            <h2>The call to prayer of <u>{getPrayerData().name}</u> is in</h2>
+            <div className='countdown'>
+              <div className='countdown-hour'>
+                <h3 className='hour'>{zeroPad(hours)}:</h3>
+                <h3>Hour</h3>
+              </div>
+              <div className='countdown-minute'>
+                <h3 className='minute'>{zeroPad(minutes)}:</h3>
+                <h3>Minute</h3>
+              </div>
+              <div className='countdown-second'>
+                <h3 className='second'>{zeroPad(seconds)}</h3>
+                <h3>Second</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
 
 function getPrayerData() {
 
@@ -37,7 +68,7 @@ function getPrayerData() {
       if (currentTime.isBefore(moment(`${todayTimetable['maghrib_jammah']} PM`, 'hh:mm'))) {
         return {
           name: 'Maghrib',
-          time: todayTimetable['maghrib_jammah']
+          time: todayTimetable['maghrib_jammah'],
         }
       }
 
@@ -56,7 +87,7 @@ function getPrayerData() {
   return {
     name: 'Fajr',
     time: todayTimetable['fajr_jammah'],
-    remaining: nextDayFajr
+    remaining: nextDayFajr,
   }
 }
 
@@ -68,13 +99,13 @@ function App() {
       <h2>{getCurrentDate}</h2>
 
       <div>
-        <PrayerTable />
-        <h3>The call to prayer of {getPrayerData().name} is in</h3>
+        {/* <PrayerTable /> */}
         <Countdown
           date={getPrayerData().remaining}
           intervalDelay={0}
           precision={3}
           daysInHours={true}
+          renderer={renderer}
         />
       </div>
     </div>

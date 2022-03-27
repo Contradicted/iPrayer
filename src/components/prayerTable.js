@@ -39,7 +39,7 @@ function PrayerTable() {
                     <td>{timetable[getCurrentDate]["isha_jammah"]}</td>
                 </tr>
             </tbody>
-        </table >
+        </table>
     )
 }
 
