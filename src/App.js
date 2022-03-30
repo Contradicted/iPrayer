@@ -6,9 +6,97 @@ import moment from 'moment';
 import { getCurrentDate, getCurrentDayPlusDays } from './components/Date';
 import Countdown, { zeroPad } from 'react-countdown';
 
+// const todayTimetable = timetable[getCurrentDate];
+// const currentTime = moment(moment().format("YYYY-MM-DD HH:mm"))
+// console.log(currentTime)
+
+function stringToTime(stringTime) {
+  return moment(moment(stringTime, 'HH:mm a').format('YYYY-MM-DD HH:mm'));
+}
+
+// let prayer = stringToTime(`${todayTimetable['asr_jammah']} PM`)
+// // console.log('foo')
+// console.log(prayer)
+
+// if (currentTime.isBefore(prayer)) {
+//   console.log("yes")
+// } else {
+//   console.log("no")
+// }
+
+// const number = moment("02:00 PM", ["h:mm A"]).format("HH:mm");
+// console.log(number);
+
+
+function getPrayerData() {
+
+  const todayTimetable = timetable[getCurrentDate];
+  const currentTime = moment(moment().format("YYYY-MM-DD HH:mm"))
+
+  for (const property in todayTimetable) {
+    if (property.endsWith("_jammah")) {
+      if (currentTime.isBefore(stringToTime(`${todayTimetable['fajr_jammah']} AM`))) {
+        return {
+          name: 'Fajr',
+          time: todayTimetable['fajr_jammah'],
+          remaining: stringToTime(`${todayTimetable['fajr_jammah']} AM`)
+        }
+      }
+
+      if (currentTime.isBefore(stringToTime(`${todayTimetable['zuhr_jammah']} PM`))) {
+        return {
+          name: 'Zuhr',
+          time: todayTimetable['zuhr_jammah'],
+          remaining: stringToTime(`${todayTimetable['zuhr_jammah']} PM`)
+        }
+      }
+
+      if (currentTime.isBefore(stringToTime(`${todayTimetable['asr_jammah']} PM`))) {
+        return {
+          name: 'Asr',
+          time: todayTimetable['asr_jammah'],
+          remaining: stringToTime(`${todayTimetable['asr_jammah']} PM`)
+        }
+      }
+
+      if (currentTime.isBefore(stringToTime(`${todayTimetable['maghrib_jammah']} PM`))) {
+        return {
+          name: 'Maghrib',
+          time: todayTimetable['maghrib_jammah'],
+          remaining: stringToTime(`${todayTimetable['maghrib_jammah']} PM`)
+        }
+      }
+
+      if (currentTime.isBefore(stringToTime(`${todayTimetable['isha_jammah']} PM`))) {
+        return {
+          name: 'Isha',
+          time: todayTimetable['isha_jammah'],
+          remaining: stringToTime(`${todayTimetable['isha_jammah']} PM`)
+        }
+      }
+    }
+  }
+
+  // Next Day
+  let nextDayFajr = timetable[getCurrentDayPlusDays(1)]["fajr_jammah"];
+  nextDayFajr = moment(nextDayFajr, 'HH:mm').add(1, 'day');
+  return {
+    name: 'Fajr',
+    time: todayTimetable['fajr_jammah'],
+    remaining: nextDayFajr,
+  }
+}
+
+console.log(getPrayerData())
+
 const renderer = ({ hours, minutes, seconds, completed }) => {
   if (completed) {
-    return <span>The call to prayer has started</span>
+    return (
+      <div>
+        <PrayerTable />
+        <h2>The call to prayer has started</h2>
+      </div>
+    )
   } else {
     return (
       <div>
@@ -34,60 +122,6 @@ const renderer = ({ hours, minutes, seconds, completed }) => {
         </div>
       </div>
     )
-  }
-}
-
-function getPrayerData() {
-
-  const todayTimetable = timetable[getCurrentDate];
-  const currentTime = moment(moment().format("YYYY-MM-DD hh:mm"))
-
-  for (const property in todayTimetable) {
-    if (property.endsWith("_jammah")) {
-      if (currentTime.isBefore(moment(`${todayTimetable['fajr_jammah']} AM`, 'hh:mm'))) {
-        return {
-          name: 'Fajr',
-          time: todayTimetable['fajr_jammah']
-        }
-      }
-
-      if (currentTime.isBefore(moment(`${todayTimetable['zuhr_jammah']} PM`, 'hh:mm'))) {
-        return {
-          name: 'Zuhr',
-          time: todayTimetable['zuhr_jammah']
-        }
-      }
-
-      if (currentTime.isBefore(moment(`${todayTimetable['asr_jammah']} PM`, 'hh:mm'))) {
-        return {
-          name: 'Asr',
-          time: todayTimetable['asr_jammah'],
-        }
-      }
-
-      if (currentTime.isBefore(moment(`${todayTimetable['maghrib_jammah']} PM`, 'hh:mm'))) {
-        return {
-          name: 'Maghrib',
-          time: todayTimetable['maghrib_jammah'],
-        }
-      }
-
-      if (currentTime.isBefore(moment(`${todayTimetable['isha_jammah']} PM`, 'hh:mm'))) {
-        return {
-          name: 'Isha',
-          time: todayTimetable['isha_jammah']
-        }
-      }
-    }
-  }
-
-  // Next Day
-  let nextDayFajr = timetable[getCurrentDayPlusDays(1)]["fajr_jammah"];
-  nextDayFajr = moment(nextDayFajr, 'hh:mm').add(1, 'day');
-  return {
-    name: 'Fajr',
-    time: todayTimetable['fajr_jammah'],
-    remaining: nextDayFajr,
   }
 }
 
