@@ -1,4 +1,5 @@
 import './App.css';
+import React, { useState } from 'react';
 import Clock from 'react-live-clock';
 import PrayerTable from './components/prayerTable';
 import timetable from './components/timetable';
@@ -6,28 +7,12 @@ import moment from 'moment';
 import { getCurrentDate, getCurrentDayPlusDays } from './components/Date';
 import Countdown, { zeroPad } from 'react-countdown';
 
-// const todayTimetable = timetable[getCurrentDate];
-// const currentTime = moment(moment().format("YYYY-MM-DD HH:mm"))
-// console.log(currentTime)
-
+// Converts String to Time
 function stringToTime(stringTime) {
   return moment(moment(stringTime, 'HH:mm a').format('YYYY-MM-DD HH:mm'));
 }
 
-// let prayer = stringToTime(`${todayTimetable['asr_jammah']} PM`)
-// // console.log('foo')
-// console.log(prayer)
-
-// if (currentTime.isBefore(prayer)) {
-//   console.log("yes")
-// } else {
-//   console.log("no")
-// }
-
-// const number = moment("02:00 PM", ["h:mm A"]).format("HH:mm");
-// console.log(number);
-
-
+// Calculates the Next Jammah Time
 function getPrayerData() {
 
   const todayTimetable = timetable[getCurrentDate];
@@ -89,51 +74,50 @@ function getPrayerData() {
 
 console.log(getPrayerData())
 
-const renderer = ({ hours, minutes, seconds, completed }) => {
-  if (completed) {
-    return (
-      <div>
-        <PrayerTable />
-        <h2>The call to prayer has started</h2>
-      </div>
-    )
-  } else {
-    return (
-      <div>
-        <PrayerTable />
-        <div className='coming-soon'>
-          <div>
-            <h2>The call to prayer of <u>{getPrayerData().name}</u> is in</h2>
-            <div className='countdown'>
-              <div className='countdown-hour'>
-                <h3 className='hour'>{zeroPad(hours)}:</h3>
-                <h3>Hour</h3>
-              </div>
-              <div className='countdown-minute'>
-                <h3 className='minute'>{zeroPad(minutes)}:</h3>
-                <h3>Minute</h3>
-              </div>
-              <div className='countdown-second'>
-                <h3 className='second'>{zeroPad(seconds)}</h3>
-                <h3>Second</h3>
+function App() {
+
+  let [timer, isCompleted] = useState(getPrayerData().remaining)
+  console.log(timer)
+
+  const Completionist = () => <h2>The call to prayer has started</h2>
+
+  // Callback function
+  const renderer = ({ hours, minutes, seconds, completed }) => {
+    if (completed) {
+      return <Completionist />
+    } else {
+      return (
+        <div>
+          <div className='coming-soon'>
+            <div>
+              <h2>The call to prayer of <u>{getPrayerData().name}</u> is in</h2>
+              <div className='countdown'>
+                <div className='countdown-hour'>
+                  <h3 className='hour'>{zeroPad(hours)}:</h3>
+                  <h3>Hour</h3>
+                </div>
+                <div className='countdown-minute'>
+                  <h3 className='minute'>{zeroPad(minutes)}:</h3>
+                  <h3>Minute</h3>
+                </div>
+                <div className='countdown-second'>
+                  <h3 className='second'>{zeroPad(seconds)}</h3>
+                  <h3>Second</h3>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
-}
-
-function App() {
 
   return (
     <div className="App">
       <h1><Clock format={'hh:mm A'} ticking={true} /></h1>
       <h2>{getCurrentDate}</h2>
-
+      <PrayerTable />
       <div>
-        {/* <PrayerTable /> */}
         <Countdown
           date={getPrayerData().remaining}
           intervalDelay={0}
