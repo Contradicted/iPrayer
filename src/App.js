@@ -72,54 +72,54 @@ function getPrayerData() {
   }
 }
 
-console.log(getPrayerData())
-
-function App() {
-
-  let [timer, isCompleted] = useState(getPrayerData().remaining)
-  console.log(timer)
-
-  const Completionist = () => <h2>The call to prayer has started</h2>
-
-  // Callback function
-  const renderer = ({ hours, minutes, seconds, completed }) => {
-    if (completed) {
-      return <Completionist />
-    } else {
-      return (
-        <div>
-          <div className='coming-soon'>
-            <div>
-              <h2>The call to prayer of <u>{getPrayerData().name}</u> is in</h2>
-              <div className='countdown'>
-                <div className='countdown-hour'>
-                  <h3 className='hour'>{zeroPad(hours)}:</h3>
-                  <h3>Hour</h3>
-                </div>
-                <div className='countdown-minute'>
-                  <h3 className='minute'>{zeroPad(minutes)}:</h3>
-                  <h3>Minute</h3>
-                </div>
-                <div className='countdown-second'>
-                  <h3 className='second'>{zeroPad(seconds)}</h3>
-                  <h3>Second</h3>
-                </div>
+// Callback function
+const renderer = ({ hours, minutes, seconds, completed }) => {
+  if (completed) {
+    return <span>The call to prayer has started</span>
+  } else {
+    return (
+      <div>
+        <div className='coming-soon'>
+          <div>
+            <h2>The call to prayer of <u>{getPrayerData().name}</u> is in</h2>
+            <div className='countdown'>
+              <div className='countdown-hour'>
+                <h3 className='hour'>{zeroPad(hours)}:</h3>
+                <h3>Hour</h3>
+              </div>
+              <div className='countdown-minute'>
+                <h3 className='minute'>{zeroPad(minutes)}:</h3>
+                <h3>Minute</h3>
+              </div>
+              <div className='countdown-second'>
+                <h3 className='second'>{zeroPad(seconds)}</h3>
+                <h3>Second</h3>
               </div>
             </div>
           </div>
         </div>
-      )
-    }
+      </div>
+    )
   }
+}
+
+console.log(getPrayerData())
+
+function App() {
+
+  const { remaining, name } = getPrayerData();
 
   return (
     <div className="App">
       <h1><Clock format={'hh:mm A'} ticking={true} /></h1>
       <h2>{getCurrentDate}</h2>
-      <PrayerTable />
+      <PrayerTable
+        name={name}
+      />
       <div>
         <Countdown
-          date={getPrayerData().remaining}
+          key={remaining}
+          date={remaining}
           intervalDelay={0}
           precision={3}
           daysInHours={true}

@@ -12,7 +12,7 @@ const timetable = {
         "maghrib_begins": "7:33",
         "maghrib_jammah": "7:40",
         "isha_begins": "8:50",
-        "isha_jammah": "8:50"
+        "isha_jammah": "9:15"
     },
     [getCurrentDayPlusDays(1)]: {
         "date": getCurrentDate,
