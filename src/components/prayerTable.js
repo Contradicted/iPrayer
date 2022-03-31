@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { getCurrentDate, getCurrentDayPlusDays } from "./Date";
 import timetable from "./timetable";
 
@@ -7,10 +7,8 @@ import timetable from "./timetable";
 function PrayerTable({ name }) {
 
     // console.log(highlight(name))
-
-    const tableRef = useRef(null);
     return (
-        <table ref={tableRef} style={{ marginBottom: "15px" }}>
+        <table style={{ marginBottom: "15px" }}>
             <thead>
                 <tr>
                     <th></th>

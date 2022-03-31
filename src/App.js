@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
 import Clock from 'react-live-clock';
 import PrayerTable from './components/prayerTable';
 import timetable from './components/timetable';
