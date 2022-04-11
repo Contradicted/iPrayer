@@ -8,7 +8,7 @@ body {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 5rem;
 }
 
 h2:nth-child(1) {
@@ -23,22 +23,27 @@ h3 {
 
 table {
   margin: 0 auto;
+  border-collapse: collapse;
 }
 
 table th {
   font-size: 1.5rem;
   padding: 10px;
+  font-weight: lighter;
 }
 
 table td {
+  padding: 2px;
   padding-bottom: 5px;
 }
 
-/* tr:nth-of-type(3) td
-{
-  background-color: grey;
-} */
+tr td:nth-of-type(2) {
+  font-weight: bold;
+}
 
+tr td:nth-of-type(3) {
+  font-weight: bold;
+}
 
 .coming-soon {
   display: flex;
@@ -56,10 +61,17 @@ table td {
 .minute,
 .second {
   font-size: 3rem;
-} 
+}
+
+.test h2 {
+  margin-top: -60px;
+  font-size: 1rem;
+  font-weight: lighter;
+}
 
 .App {
   text-align: center;
+  height: auto
 }
 
 .App-logo {

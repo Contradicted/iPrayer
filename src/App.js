@@ -3,6 +3,7 @@ import React from 'react';
 import Clock from 'react-live-clock';
 import PrayerTable from './components/prayerTable';
 import timetable from './components/timetable';
+import '../node_modules/bootstrap/dist/css/bootstrap-grid.css'
 import moment from 'moment';
 import { getCurrentDate, getCurrentDayPlusDays } from './components/Date';
 import Countdown, { zeroPad } from 'react-countdown';
@@ -111,20 +112,26 @@ function App() {
 
   return (
     <div className="App">
-      <h1><Clock format={'hh:mm A'} ticking={true} /></h1>
-      <h2>{getCurrentDate}</h2>
-      <PrayerTable
-        name={name}
-      />
-      <div>
-        <Countdown
-          key={remaining}
-          date={remaining}
-          intervalDelay={0}
-          precision={3}
-          daysInHours={true}
-          renderer={renderer}
-        />
+      <div className='container'>
+        <div className='d-flex justify-content-between'>
+          <div>
+            <h1><Clock format={'hh:mm A'} ticking={true} /></h1>
+            {/* <h2>{getCurrentDate}</h2>
+            <PrayerTable
+              name={name}
+            />  */}
+          </div>
+          <div>
+            <Countdown
+              key={remaining}
+              date={remaining}
+              intervalDelay={0}
+              precision={3}
+              daysInHours={true}
+              renderer={renderer}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
