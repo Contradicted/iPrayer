@@ -116,10 +116,10 @@ function App() {
         <div className='d-flex justify-content-between'>
           <div>
             <h1><Clock format={'hh:mm A'} ticking={true} /></h1>
-            {/* <h2>{getCurrentDate}</h2>
+            <h2>{getCurrentDate}</h2>
             <PrayerTable
               name={name}
-            />  */}
+            />
           </div>
           <div>
             <Countdown
