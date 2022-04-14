@@ -6,10 +6,68 @@
     justify-content: space-around;
 }
 
-.rowfull {
-    width: 100vw;
-    position: relative;
-    margin-left: -50vw;
-    height: 100px;
-    left: 50%;
+.foo {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+    height: 100vh;
+    background-color: #0070BA;
+}
+
+.clock {
+    color: white;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.clockWrapper {
+    display: flex;
+}
+
+.clock>p {
+    font-size: 3rem;
+}
+
+.timetable {
+    line-height: .2;
+    color: white;
+    flex: 2;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 600;
+    margin: 2rem;
+}
+
+.normalFontWeight {
+    font-weight: normal;
+    text-align: left;
+}
+
+.hello {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 100vh;
+    font-size: 3rem;
+    flex-direction: column;
+    color: rgb(64, 64, 64);
+    padding: 0;
+    margin: 0;
+    background-color: #fcfcfc;
+    background-size: 48px 48px;
+    background-image: radial-gradient(transparent 20px,
+            #ffffff 20px,
+            #ffffff 24px,
+            transparent 24px),
+        radial-gradient(transparent 20px,
+            #ffffff 20px,
+            #ffffff 24px,
+            transparent 24px);
+    background-position: 0 0, 24px 24px;
 }

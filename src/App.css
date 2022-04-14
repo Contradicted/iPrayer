@@ -33,8 +33,12 @@ table th {
 }
 
 table td {
-  padding: 2px;
+  padding: 25px;
   padding-bottom: 5px;
+}
+
+.highlight {
+  background-color: grey;
 }
 
 tr td:nth-of-type(2) {
@@ -57,10 +61,16 @@ tr td:nth-of-type(3) {
   justify-content: space-evenly;
 }
 
+.countdown h3 {
+  padding: 10px;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
 .hour,
 .minute,
 .second {
-  font-size: 3rem;
+  font-size: 5rem;
 }
 
 .test h2 {

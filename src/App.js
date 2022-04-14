@@ -3,6 +3,7 @@ import React from 'react';
 import Clock from 'react-live-clock';
 import PrayerTable from './components/prayerTable';
 import timetable from './components/timetable';
+import styles from '../src/styles/Home.module.css'
 import '../node_modules/bootstrap/dist/css/bootstrap-grid.css'
 import moment from 'moment';
 import { getCurrentDate, getCurrentDayPlusDays } from './components/Date';
@@ -82,7 +83,6 @@ const renderer = ({ hours, minutes, seconds, completed }) => {
       <div>
         <div className='coming-soon'>
           <div>
-            <h2>The call to prayer of <u>{getPrayerData().name}</u> is in</h2>
             <div className='countdown'>
               <div className='countdown-hour'>
                 <h3 className='hour'>{zeroPad(hours)}:</h3>
@@ -111,25 +111,34 @@ function App() {
   const { remaining, name } = getPrayerData();
 
   return (
-    <div className="App">
-      <div className='container'>
-        <div className='d-flex justify-content-between'>
-          <div>
-            <h1><Clock format={'hh:mm A'} ticking={true} /></h1>
-            <h2>{getCurrentDate}</h2>
-            <PrayerTable
-              name={name}
-            />
+    <div className={styles.container}>
+      <div className="App">
+        <div className='row m-0'>
+          <div className='col-5 p-0'>
+            <div className={styles.foo}>
+              <div className={styles.clock}>
+                <Clock format={'hh:mm A'} ticking={true} style={{ fontSize: '10rem' }} />
+                <h2>{getCurrentDate}</h2>
+              </div>
+              <div className={styles.timetable}>
+                <PrayerTable
+                  name={name}
+                />
+              </div>
+            </div>
           </div>
-          <div>
-            <Countdown
-              key={remaining}
-              date={remaining}
-              intervalDelay={0}
-              precision={3}
-              daysInHours={true}
-              renderer={renderer}
-            />
+          <div className='col-7'>
+            <div className={styles.hello}>
+              <h2>The call to prayer of <u>{getPrayerData().name}</u> is in</h2>
+              <Countdown
+                key={remaining}
+                date={remaining}
+                intervalDelay={0}
+                precision={3}
+                daysInHours={true}
+              // renderer={renderer}
+              />
+            </div>
           </div>
         </div>
       </div>
